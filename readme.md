@@ -60,8 +60,6 @@ http://localhost:3000/api
 src/
 ├── main.ts              # Application entry point
 ├── app.module.ts        # Root application module
-├── app.controller.ts    # Root application controller
-└── app.service.ts       # Root application service
 ```
 
 ## Environment Variables
