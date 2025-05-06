@@ -3,7 +3,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './modules/v1/user/user.module';
 import { AuthModule } from './modules/v1/auth/auth.module';
-import { PostModule } from './modules/v1/post/post.module';
 import { CommonModule } from './common/common.module';
 import { ConfigModule } from './config/config.module';
 import { UserModule } from './modules/v2/user/user.module';
@@ -16,7 +15,6 @@ import { UserModule } from './modules/v2/user/user.module';
         }),
 		UserModule,
 		AuthModule,
-		PostModule,
 		CommonModule,
 		ConfigModule,
 	],
