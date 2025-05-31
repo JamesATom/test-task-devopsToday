@@ -1,11 +1,18 @@
 // main.ts
 import { NestFactory } from '@nestjs/core';
+import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
-    
+    const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
+
+    app.enableCors({
+        origin: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+        credentials: true,
+    });
+
     const config = new DocumentBuilder()
         .setTitle('[App Name] API')
         .setDescription('The [App Name] API description')
@@ -17,18 +24,13 @@ async function bootstrap() {
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api', app, document);
 
-    app.enableCors({
-        origin: '*',
-        methods: '*',
-        allowedHeaders: '*',
-        credentials: true,
-    });
-
-
     const PORT = process.env.PORT;
     await app.listen(PORT, '0.0.0.0', () => {
-        console.log(`Weather App server is running on port => ${PORT}`);
+        console.log(`App server is running on port => ${PORT}`);
     });
 }
 
-bootstrap();
+bootstrap().catch(error => {
+    console.error('Failed to start the application:', error);
+    process.exit(1);
+});
