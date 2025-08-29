@@ -1,0 +1,18 @@
+services:
+    mongodb:
+        image: mongo:latest
+        container_name: test-task-mongodb
+        ports:
+            - '27017:27017'
+        volumes:
+            - mongodb_data:/data/db
+        healthcheck:
+            test: ['CMD', 'mongosh', '--eval', '''db.adminCommand("ping")''']
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 10s
+        restart: always
+
+volumes:
+    mongodb_data:
