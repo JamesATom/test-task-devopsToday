@@ -1,4 +1,5 @@
-// main.ts
+import * as dotenv from 'dotenv';
+dotenv.config();
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
@@ -14,10 +15,10 @@ async function bootstrap() {
     });
 
     const config = new DocumentBuilder()
-        .setTitle('[App Name] API')
-        .setDescription('The [App Name] API description')
+        .setTitle('Countries API')
+        .setDescription('API for retrieving country information including borders, population data, and flags')
         .setVersion('1.0')
-        .addTag('[App Name]')
+        .addTag('Countries')
         .addBearerAuth()
         .build();
 
