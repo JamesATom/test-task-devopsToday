@@ -89,12 +89,7 @@ export const ApiInternalServerErrorResponse = (message: string) =>
     });
 
 // Common combined decorators
-export const ApiAuth = () =>
-    applyDecorators(
-        ApiBearerAuth('JWT'),
-        ApiUnauthorizedResponse(),
-        ApiForbiddenResponse(),
-    );
+export const ApiAuth = () => applyDecorators(ApiBearerAuth('JWT'), ApiUnauthorizedResponse(), ApiForbiddenResponse());
 
 // Common CRUD operation decorators
 export const ApiGetAll = (entity: string, type: any) =>
